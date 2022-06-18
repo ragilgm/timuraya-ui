@@ -1,0 +1,40 @@
+<div class="container mb-5 lg-12">
+  <h3 class="text-center mt-5 mb-5">Form Pengajuan</h3>
+  <form [formGroup]="editPengajuan" (ngSubmit)="submit()"  #f="ngForm">
+
+    <div class="row mt-3">
+      <div class="col">
+        <input matInput id="kegiatan" class="form-control" formControlName="kegiatan" placeholder="Kegiatan" required="false" >
+      </div>
+      <div class="col">
+        <input matInput id="keterangan" class="form-control" formControlName="keterangan" placeholder="Keterangan" required="false">
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col">
+        <input matInput id="jumlah" class="form-control" formControlName="jumlah" placeholder="Jumlah" required="false">
+      </div>
+      <div class="col">
+        <input matInput id="divisi" class="form-control" formControlName="divisi" placeholder="Divisi" required="false">
+      </div>
+    </div>
+
+
+    <div class="row col-5">
+      <div class=" col-lg-2">
+        <button type="button" class="btn btn-sm btn-danger mr-3 mt-5" (click)="backToHome()">Kembali</button>
+      </div>
+
+      <div class="col-lg-2">
+        <button type="submit" class="btn btn-sm btn-primary mr-3 mt-5">Kirim</button>
+      </div>
+    </div>
+
+
+
+
+  </form>
+
+
+</div>

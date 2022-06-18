@@ -1,0 +1,29 @@
+<div class="login-container d-flex col-12 justify-content-center" xmlns="http://www.w3.org/1999/html"
+     xmlns="http://www.w3.org/1999/html">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="p-3 col-4 mt-5"  #f="ngForm">
+    <img src="assets/logo-template.png" class="rounded mx-auto d-block" style="height: 100px" alt="astrapay logo">
+    <br>
+    <h4 class="h4 mb-3 font-weight-normal" align="center">Login to Dashboard</h4>
+    <label for="username" class="sr-only mb-2">Username</label>
+    <input type="username" id="username" class="form-control mb-3" formControlName="username" placeholder="Username" required="" autofocus="">
+    <label for="password" class="sr-only mb-2">Password</label>
+
+    <div class="input-group">
+      <input matInput id="password" class="form-control" formControlName="password" placeholder="Password" required="" [type]="hide ? 'password' : 'text'">
+      <span class="input-group-text">
+<!--        <mat-icon  id="eyePassword" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+        </span>
+    </div>
+
+    <div class="d-grid gap-2">
+      <div class="alert alert-danger fs-small p-2 fw-bold mt-2 " *ngIf="f.submitted && !isValid">
+        {{ errorMessage }}
+      </div>
+      <button [disabled]="isLoading" [ngClass]="f.submitted && !isValid?'btn btn-primary btn-block':'btn btn-primary btn-block mt-3'" class="btn btn-primary btn-block mt-2" type="submit">
+        Login
+      </button>
+    </div>
+
+  </form>
+</div>
+

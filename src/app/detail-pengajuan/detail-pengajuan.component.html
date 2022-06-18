@@ -1,0 +1,63 @@
+<div class="container">
+
+  <div class="card mt-5">
+    <h5 class="card-header">Detail Pengajuan</h5>
+    <div class="card-body">
+      <div class="col-lg-12 row">
+        <div class="col-lg-4 mt-2">No. Pengajuan :</div><div class="col-lg-8 mt-2">{{detailPengajuan.noPengajuan}}</div>
+        <div class="col-lg-4 mt-2">Kegiatan :</div><div class="col-lg-8 mt-2">{{detailPengajuan.kegiatan}}</div>
+        <div class="col-lg-4 mt-2">Keterangan :</div><div class="col-lg-8 mt-2">{{detailPengajuan.keterangan}}</div>
+        <div class="col-lg-4 mt-2">Jumlah :</div><div class="col-lg-8 mt-2">Rp. {{detailPengajuan.jumlah | number : '1.0-2'}}</div>
+        <div class="col-lg-4 mt-2">Divisi :</div><div class="col-lg-8 mt-2">{{detailPengajuan.divisi}}</div>
+        <div class="col-lg-4 mt-2">Tanggal :</div><div class="col-lg-8 mt-2">{{detailPengajuan.tanggalDibuat | date: 'YYYY-MM-dd HH:mm:ss'}}</div>
+        <div class="col-lg-4 mt-2">Status :</div><div class="col-lg-8 mt-2">
+        <span class="badge badge-secondary" *ngIf="detailPengajuan.status=='SUB'">Pengajuan dikirim</span>
+        <span class="badge badge-primary" *ngIf="detailPengajuan.status=='APPROVED_BENDAHARA'">disetujui bendahara</span>
+        <span class="badge badge-success" *ngIf="detailPengajuan.status=='APPROVED'">Pengajuan selesai</span>
+        <span class="badge badge-danger" *ngIf="detailPengajuan.status=='REJECT'">Pengajuan ditolak</span>
+      </div>
+      <div class="col-lg-4 mt-2" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan">Link Invoice :</div><div class="col-lg-8 mt-2">
+        <a class="text-primary" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan" (click)="getLetterFile(detailPengajuan.id)">View</a>
+        <a class="text-primary ml-2" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan" [href]="'http://localhost:8080/pengajuan/letter/'+detailPengajuan.id+'/download'">Download</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="detailPengajuan.historyPengajuans?.length === 0 ; else elseBlock"></div>
+  <ng-template #elseBlock>
+  <div class="card mt-5">
+    <h5 class="card-header">History Pengajuan</h5>
+
+
+
+
+    <div *ngFor="let detail of detailPengajuan.historyPengajuans">
+      <div class="card-body">
+        <div class="col-lg-12 row">
+          <div class="col-lg-4 mt-2">Di Setujui Oleh :</div><div class="col-lg-8 mt-2">{{detail.biodata?.nama}}</div>
+          <div class="col-lg-4 mt-2">Jabatan :</div><div class="col-lg-8 mt-2">{{detail.biodata?.jabatan}}</div>
+          <div class="col-lg-4 mt-2">Status :</div><div class="col-lg-8 mt-2">
+          <span class="badge badge-success" *ngIf="detail.status=='APPROVED'">Pengajuan disetujui</span>
+          <span class="badge badge-danger" *ngIf="detail.status=='REJECT'">Pengajuan ditolak</span>
+        </div>
+          <div class="col-lg-4 mt-2">Catatan :</div><div class="col-lg-8 mt-2">{{detail.catatan}}</div>
+          <div class="col-lg-4 mt-2">Nominal yang di setujui :</div><div class="col-lg-8 mt-2">Rp. {{detail.nominal | number : '1.0-2'}}</div>
+          <div class="col-lg-4 mt-2">Tanggal :</div><div class="col-lg-8 mt-2">{{detail.tanggalDibuat | date: 'YYYY-MM-dd HH:mm:ss'}}</div>
+        </div>
+      </div>
+      <hr>
+    </div>
+
+    </div>
+
+  </ng-template>
+
+
+  <div class="row col-2">
+    <div class=" col mr-5">
+      <button type="button" class="btn btn-sm btn-danger mr-3 mt-5" (click)="backToHome()">Kembali</button>
+    </div>
+
+  </div>
+
+  </div>

@@ -1,0 +1,48 @@
+<div class="container mb-5 lg-12">
+  <h3 class="text-center mt-5 mb-5">Form Pengajuan</h3>
+  <form [formGroup]="createPengajuan" (ngSubmit)="submit()"  #f="ngForm">
+
+    <div class="row mt-3">
+      <div class="col">
+        Kegiatan :
+        <input matInput id="kegiatan" class="form-control" formControlName="kegiatan" placeholder="" required="false">
+      </div>
+      <div class="col">
+        Keterangan :
+        <input matInput id="keterangan" class="form-control" formControlName="keterangan" placeholder="" required="false">
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col">
+        Jumlah :
+        <input matInput id="jumlah" type="number" class="form-control" formControlName="jumlah" placeholder="Jumlah" required="false">
+      </div>
+      <div class="col">
+        Divisi :
+        <select id="divisi" formControlName="divisi" placeholder="Kegiatan"  class="form-control" aria-label="Default select example">
+          <option value="Operational">Operational</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Tiketing">Tiketing</option>
+        </select>
+      </div>
+    </div>
+
+
+   <div class="row col-5">
+     <div class=" col-lg-2">
+       <button type="button" class="btn btn-sm btn-danger mr-3 mt-5" (click)="backToHome()">Kembali</button>
+     </div>
+
+     <div class="col-lg-2">
+       <button type="submit" class="btn btn-sm btn-primary mr-3 mt-5">Kirim</button>
+     </div>
+   </div>
+
+
+
+
+  </form>
+
+
+</div>
