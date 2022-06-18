@@ -45,11 +45,14 @@ export interface PengajuanRequestDto {
   gender?:      string;
   kegiatan?:    string;
   keterangan?:  string;
-  jumlah?:      string;
+  items?: ItemRequestDto[];
   divisi?:      string;
   tanggal?:     string;
   terbilang?:   string;
   kadiv?:       string;
 }
 
-
+export interface ItemRequestDto{
+  nama?: string;
+  harga?: string;
+}

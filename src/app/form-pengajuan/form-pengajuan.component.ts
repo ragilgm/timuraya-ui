@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {PengajuanService} from "../core/pengajuan/pengajuan.service";
+import {ItemRequestDto} from "../core/pengajuan/pengajuan.model";
 
 @Component({
   selector: 'app-form-pengajuan',
@@ -14,6 +15,9 @@ export class FormPengajuanComponent implements OnInit {
   errorMessage!: string;
   isValid : boolean = true;
   hide:boolean = true;
+  orderForm!: FormGroup;
+  items!: FormArray;
+
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +30,9 @@ export class FormPengajuanComponent implements OnInit {
     if(localStorage.getItem("id") == null){
       this.router.navigate(['/login']);
     }
+    this.orderForm = new FormGroup({
+      items: new FormArray([])
+    });
     this.createPengajuan = this.fb.group({
       "noPengajuan": ['', Validators.required],
       "nama": ['', Validators.required],
@@ -46,20 +53,21 @@ export class FormPengajuanComponent implements OnInit {
 
   submit(){
     console.log(this.createPengajuan.value)
-    const {noPengajuan, nama, gender, kegiatan, keterangan, jumlah, divisi, tanggal, terbilang, kadiv} = this.createPengajuan.value;
+    const {kegiatan, keterangan, divisi} = this.createPengajuan.value;
+    this.items = this.orderForm.get('items') as FormArray;
+
+    if(this.items.length==0){
+      alert("Item harus ditambahkan")
+      return
+    }
 
     var request = {
-      "noPengajuan":noPengajuan,
-      "nama":nama,
-      "gender":gender,
       "kegiatan":kegiatan,
       "keterangan":keterangan,
-      "jumlah":jumlah,
       "divisi":divisi,
-      "tanggal":tanggal,
-      "terbilang":terbilang,
-      "kadiv":kadiv,
+      "items": this.items.value
     }
+
     this.pengajuanService.createPengajuan(request)
       .subscribe(
         response => {
@@ -72,5 +80,32 @@ export class FormPengajuanComponent implements OnInit {
       );
 
   }
+
+  createItem(): FormGroup {
+    return this.fb.group({
+      nama: '',
+      harga: '',
+    });
+  }
+
+  test(){
+    console.log(this.orderForm.value)
+  }
+
+  addItem(): void {
+    this.items = this.orderForm.get('items') as FormArray;
+    this.items.push(this.createItem())
+  }
+
+  removeItem(index: number): void {
+    this.items = this.orderForm.get('items') as FormArray;
+    this.items.removeAt(index)
+  }
+
+
+  get lessons() {
+    return this.orderForm?.get('items') as FormArray;
+  }
+
 
 }
