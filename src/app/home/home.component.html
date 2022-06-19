@@ -61,6 +61,25 @@ s    >
 <div class="container-fluid mt-5">
   <h3 class="mb-3">Daftar Pengajuan</h3>
 
+  <form [formGroup]="filterPengajuan" (ngSubmit)="getPengajuan()"  #f="ngForm">
+    <div class="row">
+      <div class="col-lg-2 mb-2">
+        <input type="text" class="form-control" formControlName="noPengajuan" placeholder="no pengajuan">
+      </div>
+      <div class="col-lg-2 mb-2">
+        <input type="text" class="form-control" formControlName="kegiatan" placeholder="kegiatan">
+      </div>
+      <div class="col-lg-2 mb-2">
+        <input type="text" class="form-control" formControlName="divisi" placeholder="divisi">
+      </div>
+      <div class="col-lg-2 mb-2">
+        <button class="btn btn-primary" type="submit">Filter</button>
+      </div>
+    </div>
+    <hr>
+  </form>
+
+
 
   <table class="table">
     <thead>

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {PengajuanService} from "../core/pengajuan/pengajuan.service";
 import {PengajuanDto} from "../core/pengajuan/pengajuan.model";
-import {LoginDto} from "../core/login/login.model";
 
 @Component({
   selector: 'app-home',
@@ -12,6 +11,7 @@ import {LoginDto} from "../core/login/login.model";
 })
 export class HomeComponent implements OnInit {
 
+  filterPengajuan!: FormGroup;
   listPengajuan?:PengajuanDto[] = []
   isLoading: boolean = false;
   jabatan : string |undefined |null
@@ -29,6 +29,13 @@ export class HomeComponent implements OnInit {
     if(localStorage.getItem("id") == null){
       this.router.navigate(['/login']);
     }
+
+    this.filterPengajuan = this.fb.group({
+      "noPengajuan": ['', Validators.required],
+      "kegiatan": ['', Validators.required],
+      "divisi": ['', Validators.required],
+    });
+
     this.canActive()
     this.getPengajuan()
   }
@@ -52,7 +59,15 @@ export class HomeComponent implements OnInit {
   }
 
   getPengajuan(){
-    this.pengajuanService.getPengajuan()
+
+   let filterPengajuan = {
+      "noPengajuan":this.filterPengajuan.value.noPengajuan,
+      "kegiatan":this.filterPengajuan.value.kegiatan,
+      "divisi":this.filterPengajuan.value.divisi,
+    }
+
+    console.log(filterPengajuan)
+    this.pengajuanService.getPengajuan(filterPengajuan)
       .subscribe(
         response => {
           this.listPengajuan=response
@@ -104,9 +119,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  update(id:number){
-
-  }
 
 
   approve(id:number){

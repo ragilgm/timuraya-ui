@@ -17,8 +17,19 @@ export class PengajuanService {
     this.pengajuanUrl = environment.baseUrl + environment.pengajuanUrl;
   }
 
-  getPengajuan() {
-    return this.http.get<PengajuanDto[]>(this.pengajuanUrl)
+  getPengajuan(filterPengajuan:PengajuanRequestDto) {
+    var params = '?';
+    if(filterPengajuan.noPengajuan!=''){
+      params+='noPengajuan='+filterPengajuan.noPengajuan
+    }
+    if(filterPengajuan.kegiatan!=''){
+      params+='kegiatan='+filterPengajuan.kegiatan
+    }
+    if(filterPengajuan.divisi!=''){
+      params+='divisi='+filterPengajuan.divisi
+    }
+
+    return this.http.get<PengajuanDto[]>(this.pengajuanUrl+params)
       .pipe(
         catchError(() => {
           return throwError("Load error");
