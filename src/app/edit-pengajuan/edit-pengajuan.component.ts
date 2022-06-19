@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {PengajuanService} from "../core/pengajuan/pengajuan.service";
 import {PengajuanDto} from "../core/pengajuan/pengajuan.model";
@@ -17,6 +17,8 @@ export class EditPengajuanComponent implements OnInit {
   errorMessage!: string;
   isValid : boolean = true;
   hide:boolean = true;
+  orderForm!: FormGroup;
+  items!: FormArray;
 
 
   constructor(
@@ -30,18 +32,22 @@ export class EditPengajuanComponent implements OnInit {
     if(localStorage.getItem("id") == null){
       this.router.navigate(['/login']);
     }
+
+    this.orderForm = new FormGroup({
+      items: new FormArray([])
+    });
+
     this.activeRouter.paramMap.subscribe((params: ParamMap) => {
       this.paramId = params.get('id')
     })
 
-    this.loadPengajuan(this.paramId)
-
     this.editPengajuan = this.fb.group({
       "kegiatan": ['', Validators.required],
       "keterangan": ['', Validators.required],
-      "jumlah": ['', Validators.required],
       "divisi": ['', Validators.required]
     });
+
+    this.loadPengajuan(this.paramId)
 
     console.log(this.datapengajuan)
   }
@@ -59,8 +65,18 @@ export class EditPengajuanComponent implements OnInit {
           this.datapengajuan=response
           this.editPengajuan.controls['kegiatan'].setValue(response.kegiatan)
           this.editPengajuan.controls['keterangan'].setValue(response.keterangan)
-          this.editPengajuan.controls['jumlah'].setValue(response.jumlah)
           this.editPengajuan.controls['divisi'].setValue(response.divisi)
+          console.log("rest"+response)
+            response.items?.forEach(data=> {
+              this.items = this.orderForm.get('items') as FormArray;
+              this.items.push(this.fb.group({
+                nama: data.nama,
+                harga: data.harga,
+              }))
+            })
+
+          console.log("wkwkwkw"+this.orderForm)
+
         },
         ()=> {
           alert("Server Error")
@@ -71,14 +87,15 @@ export class EditPengajuanComponent implements OnInit {
 
   submit(){
     console.log(this.editPengajuan.value)
-    const {kegiatan, keterangan, jumlah, divisi} = this.editPengajuan.value;
+    const {kegiatan, keterangan, divisi} = this.editPengajuan.value;
 
     var request = {
       "kegiatan":kegiatan,
       "keterangan":keterangan,
-      "jumlah":jumlah,
-      "divisi":divisi
+      "divisi":divisi,
+      "items": this.items.value
     }
+
 
     this.pengajuanService.updatePengajuan(this.paramId,request)
       .subscribe(
@@ -92,5 +109,28 @@ export class EditPengajuanComponent implements OnInit {
       );
 
   }
+
+  createItem(): FormGroup {
+    return this.fb.group({
+      nama: '',
+      harga: '',
+    });
+  }
+
+  addItem(): void {
+    this.items = this.orderForm.get('items') as FormArray;
+    this.items.push(this.createItem())
+  }
+
+  removeItem(index: number): void {
+    this.items = this.orderForm.get('items') as FormArray;
+    this.items.removeAt(index)
+  }
+
+
+  get lessons() {
+    return this.orderForm?.get('items') as FormArray;
+  }
+
 
 }

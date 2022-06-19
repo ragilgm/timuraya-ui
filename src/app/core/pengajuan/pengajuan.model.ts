@@ -14,6 +14,7 @@ export interface PengajuanDto {
   status?: string;
   tanggalDibuat?: Date;
   tanggalDiupdate?: Date;
+  items?:ItemDto[]
   historyPengajuans?: HistoryPengajuanDto[];
 }
 
@@ -53,6 +54,12 @@ export interface PengajuanRequestDto {
 }
 
 export interface ItemRequestDto{
+  nama?: string;
+  harga?: string;
+}
+
+
+export interface ItemDto{
   nama?: string;
   harga?: string;
 }

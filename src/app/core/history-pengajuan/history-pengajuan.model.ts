@@ -5,7 +5,6 @@ export interface HistoryPengajuanRequestDto {
   pengajuanId: string;
   status: string;
   catatan: string;
-  nominal: string;
 }
 
 export interface HistoryPengajuanDto {

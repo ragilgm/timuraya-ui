@@ -1,25 +1,50 @@
 <div class="container">
 
   <div class="card mt-5">
-    <h5 class="card-header">Approval Pengajuan</h5>
+    <h5 class="card-header">Detail Pengajuan</h5>
     <div class="card-body">
       <div class="col-lg-12 row">
         <div class="col-lg-4 mt-2">No. Pengajuan :</div><div class="col-lg-8 mt-2">{{detailPengajuan.noPengajuan}}</div>
         <div class="col-lg-4 mt-2">Kegiatan :</div><div class="col-lg-8 mt-2">{{detailPengajuan.kegiatan}}</div>
         <div class="col-lg-4 mt-2">Keterangan :</div><div class="col-lg-8 mt-2">{{detailPengajuan.keterangan}}</div>
-        <div class="col-lg-4 mt-2">Jumlah :</div><div class="col-lg-8 mt-2">{{detailPengajuan.jumlah}}</div>
         <div class="col-lg-4 mt-2">Divisi :</div><div class="col-lg-8 mt-2">{{detailPengajuan.divisi}}</div>
-        <div class="col-lg-4 mt-2">Tanggal :</div><div class="col-lg-8 mt-2">{{detailPengajuan.tanggalDibuat}}</div>
-        <div class="col-lg-4 mt-2">Status :</div><div class="col-lg-8 mt-2">
-        <span class="badge badge-secondary" *ngIf="detailPengajuan.status=='SUB'">Pengajuan dikirim</span>
-        <span class="badge badge-primary" *ngIf="detailPengajuan.status=='APPROVED_BENDAHARA'">disetujui bendahara</span>
-        <span class="badge badge-success" *ngIf="detailPengajuan.status=='APPROVED'">Pengajuan selesai</span>
-        <span class="badge badge-danger" *ngIf="detailPengajuan.status=='REJECT'">Pengajuan ditolak</span>
+        <div class="col-lg-4 mt-2">Tanggal :</div><div class="col-lg-8 mt-2">{{detailPengajuan.tanggalDibuat | date: 'YYYY-MM-dd HH:mm:ss'}}</div>
+        <div class="col-lg-4 mt-2">Items :</div>
+        <div class="col-lg-8 mt-2">
+          <table class="table">
+            <thead>
+            <tr>
+              <td>Nama</td>
+              <td>Harga</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of detailPengajuan.items">
+              <td>{{item.nama}}</td>
+              <td>Rp. {{item.harga | number : '1.0-2'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-lg-4 mt-2">Status :</div>
+        <div class="col-lg-8 mt-2">
+          <span class="badge badge-secondary" *ngIf="detailPengajuan.status=='SUB'">Pengajuan dikirim</span>
+          <span class="badge badge-primary" *ngIf="detailPengajuan.status=='APPROVED_BENDAHARA'">disetujui bendahara</span>
+          <span class="badge badge-success" *ngIf="detailPengajuan.status=='APPROVED'">Pengajuan selesai</span>
+          <span class="badge badge-danger" *ngIf="detailPengajuan.status=='REJECT'">Pengajuan ditolak</span>
+        </div>
+        <div class="col-lg-4 mt-2">Jumlah :</div><div class="col-lg-8 mt-2">Rp. {{detailPengajuan.jumlah | number : '1.0-2'}}</div>
+
       </div>
-        <div class="col-lg-4 mt-2">Tanggal Dibuat :</div><div class="col-lg-8 mt-2">{{detailPengajuan.tanggalDibuat}}</div>
-      </div>
+
     </div>
   </div>
+
+</div>
+
+
+
+<div class="container">
 
   <div class="container mb-5 lg-12">
     <h3 class="text-center mt-5 mb-5">Approval Pengajuan</h3>
@@ -31,10 +56,6 @@
         <div class="col-lg-4"></div>
 
         <div class="col-lg-5">
-          <div class="mb-3">
-        <input matInput id="nominal" class="form-control" formControlName="nominal" placeholder="Nominal yang di setujui" required="false">
-
-          </div>
           <div class="mb-3">
         <textarea matInput id="catatan" class="form-control" formControlName="catatan" placeholder="Keterangan" required="false"></textarea>
           </div>
