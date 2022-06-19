@@ -26,14 +26,19 @@
              *ngFor="let item of lessons.controls ; let i = index;">
           <div [formGroupName]="i">
             <div class="col-lg-12 mt-3 row">
-              <div class="col-lg-5">
+              <div class="col-lg-4">
                 Nama :
                 <input matInput id="nama" type="text" class="form-control" formControlName="nama" placeholder="" required="false">
               </div>
-              <div class="col-lg-5">
+              <div class="col-lg-3">
+                Qty :
+                <input matInput id="qty" type="number" class="form-control" formControlName="qty" placeholder="" required="false">
+              </div>
+              <div class="col-lg-3">
                 Harga :
                 <input matInput id="harga" type="number" class="form-control" formControlName="harga" placeholder="" required="false">
               </div>
+
               <div class="col-lg-2 mt-4">
                 <i class="fa-solid fa-minus text-danger" (click)="removeItem(i)"></i>
               </div>

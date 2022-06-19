@@ -72,6 +72,7 @@ export class EditPengajuanComponent implements OnInit {
               this.items.push(this.fb.group({
                 nama: data.nama,
                 harga: data.harga,
+                qty:data.qty
               }))
             })
 
@@ -114,6 +115,7 @@ export class EditPengajuanComponent implements OnInit {
     return this.fb.group({
       nama: '',
       harga: '',
+      qty:''
     });
   }
 

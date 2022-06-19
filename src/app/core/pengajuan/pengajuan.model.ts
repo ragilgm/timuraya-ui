@@ -56,10 +56,14 @@ export interface PengajuanRequestDto {
 export interface ItemRequestDto{
   nama?: string;
   harga?: string;
+  qty?:number
+  total?:number
 }
 
 
 export interface ItemDto{
   nama?: string;
   harga?: string;
+  qty?:number;
+  total?:number
 }

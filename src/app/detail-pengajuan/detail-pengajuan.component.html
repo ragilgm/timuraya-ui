@@ -39,12 +39,16 @@
             <tr  scope="row">
               <td>Nama</td>
               <td>Harga</td>
+              <td>Qty</td>
+              <td>Total</td>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let item of detailPengajuan.items"  scope="row">
               <td>{{item.nama}}</td>
               <td>Rp. {{item.harga | number : '1.0-2'}}</td>
+              <td>{{item.qty}}</td>
+              <td>Rp. {{item.total | number : '1.0-2'}}</td>
             </tr>
             </tbody>
           </table>

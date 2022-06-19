@@ -27,9 +27,8 @@ export class ApprovalPengajuanComponent implements OnInit {
 
   ngOnInit(): void {
     this.historyPengajuan = this.fb.group({
-      "nominal": ['', Validators.required],
       "catatan": ['', Validators.required],
-
+      "status": ['', Validators.required],
     });
 
     this.activeRouter.paramMap.subscribe((params: ParamMap) => {
@@ -58,8 +57,7 @@ export class ApprovalPengajuanComponent implements OnInit {
 
   submit(){
     const {
-      nominal,
-      catatan
+      catatan,
     } = this.historyPengajuan.value;
 
     console.log(this.historyPengajuan.value)
@@ -69,7 +67,6 @@ export class ApprovalPengajuanComponent implements OnInit {
       "pengajuanId":""+this.paramId,
       "status":this.status,
       "catatan":catatan,
-      "nominal":nominal
     }
     console.log(request)
     this.historyPengajuanService.createHistoryPengajuan(request)

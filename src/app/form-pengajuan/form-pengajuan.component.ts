@@ -85,6 +85,7 @@ export class FormPengajuanComponent implements OnInit {
     return this.fb.group({
       nama: '',
       harga: '',
+      qty:'',
     });
   }
 
