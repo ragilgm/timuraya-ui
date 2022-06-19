@@ -7,6 +7,7 @@ export const environment = {
   baseUrl:"http://localhost:8080/",
   loginPath:"user/login",
   pengajuanUrl: "pengajuan",
+  reportUrl: "report",
   historyPengajuanPath:"history-pengajuan"
 };
 

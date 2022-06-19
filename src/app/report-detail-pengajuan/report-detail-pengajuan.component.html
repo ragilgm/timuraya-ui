@@ -1,0 +1,83 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand"><img src="assets/logo-template.png" alt="" srcset="" style="height: 40px"></a>
+
+    <!-- Collapsible wrapper -->
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      mdbCollapse
+      s    >
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <div class="nav-link" aria-current="page" (click)="goToHome()">Home</div>
+        </li>
+        <li class="nav-item" *ngIf="adminPengajuan" >
+          <a class="nav-link" aria-current="page" (click)="goToFormPengajuan()" >Pengajuan</a>
+        </li>
+        <li class="nav-item" *ngIf="adminBedahara" >
+          <a class="nav-link" aria-current="page" (click)="goToReportPengajuan()" >Report Pengajuan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  aria-current="page" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+
+
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!-- Large modal -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>-->
+
+
+<div class="container">
+  <div class="card mt-3">
+    <div class="card-body">
+      <div class="text-center "><h4>Report Pengajuan</h4></div>
+      <div class="col-lg-4 mt-5">
+        <strong>Total Pengeluaran : Rp. {{reports.totalPengeluaran | number : '1.0-2'}}</strong>
+      </div>
+      <div class="col-lg-12 row mt-3" *ngFor="let report of reports.reportPengajuan | keyvalue">
+        <div class="col-lg-8 my-3">
+          <strong>Tanggal : {{report.key}}</strong>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>No.Pengajuan</th>
+              <th>Kegiatan</th>
+              <th>keterangan</th>
+              <th>divisi</th>
+              <th>jumlah</th>
+              <th>tanggalDibuat</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reportDetail of report.value">
+                <td>{{reportDetail.noPengajuan}}</td>
+                <td>{{reportDetail.kegiatan}}</td>
+                <td>{{reportDetail.keterangan}}</td>
+                <td>{{reportDetail.divisi}}</td>
+                <td>Rp. {{reportDetail.jumlah | number : '1.0-2'}}</td>
+                <td>{{reportDetail.tanggalDibuat | date: 'YYYY-MM-dd HH:mm:ss'}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import {ReportPengajuanComponent} from "./report-pengajuan/report-pengajuan.comp
 import {ApprovalPengajuanComponent} from "./approval-pengajuan/approval-pengajuan.component";
 import {EditPengajuanComponent} from "./edit-pengajuan/edit-pengajuan.component";
 import {LetterPengajuanComponent} from "./letter-pengajuan/letter-pengajuan.component";
+import {ReportDetailPengajuanComponent} from "./report-detail-pengajuan/report-detail-pengajuan.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'letter-pengajuan/:id',
     component: LetterPengajuanComponent
+  },
+  {
+    path: 'report-detail',
+    component: ReportDetailPengajuanComponent
   }
 ];
 

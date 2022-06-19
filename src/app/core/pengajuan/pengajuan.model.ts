@@ -6,7 +6,7 @@ export interface PengajuanDto {
   gender?: string;
   kegiatan?: string;
   keterangan?: string;
-  jumlah?: string;
+  jumlah?: number;
   divisi?: string;
   tanggal?: string;
   terbilang?: string;

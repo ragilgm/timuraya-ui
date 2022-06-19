@@ -19,6 +19,8 @@ import { EditPengajuanComponent } from './edit-pengajuan/edit-pengajuan.componen
 import { LetterPengajuanComponent } from './letter-pengajuan/letter-pengajuan.component';
 import {PdfViewerModule} from "ng2-pdf-viewer";
 import {NgxExtendedPdfViewerServerModule} from "ngx-extended-pdf-viewer";
+import { ReportDetailPengajuanComponent } from './report-detail-pengajuan/report-detail-pengajuan.component';
+import {ReportService} from "./core/report/report.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import {NgxExtendedPdfViewerServerModule} from "ngx-extended-pdf-viewer";
     ApprovalPengajuanComponent,
     EditPengajuanComponent,
     LetterPengajuanComponent,
+    ReportDetailPengajuanComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import {NgxExtendedPdfViewerServerModule} from "ngx-extended-pdf-viewer";
     NgxExtendedPdfViewerServerModule
 
   ],
-  providers: [LoginService,PengajuanService,HistoryPengajuanService],
+  providers: [LoginService,PengajuanService,HistoryPengajuanService,ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

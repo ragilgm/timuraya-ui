@@ -25,7 +25,7 @@ s    >
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <div class="nav-link" aria-current="page" href="#">Home</div>
+          <div class="nav-link" aria-current="page" (click)="goToHome()">Home</div>
         </li>
         <li class="nav-item" *ngIf="adminPengajuan" >
           <a class="nav-link" aria-current="page" (click)="goToFormPengajuan()" >Pengajuan</a>

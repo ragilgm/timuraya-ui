@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
   }
 
   goToReportPengajuan(){
-    this.router.navigate(['/report-pengajuan']);
+    this.router.navigate(['/report-detail']);
   }
 
   goToDetailPengajuan(id: number) {
@@ -125,6 +125,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/approval-pengajuan/'+id]);
   }
 
-
+  goToHome() {
+    this.router.navigate(['/home']);
+  }
 
 }

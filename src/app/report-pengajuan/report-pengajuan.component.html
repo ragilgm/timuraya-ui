@@ -1,1 +1,128 @@
-<p>report-pengajuan works!</p>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand"><img src="assets/logo-template.png" alt="" srcset="" style="height: 40px"></a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="toggle()"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      mdbCollapse
+      s    >
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <div class="nav-link" aria-current="page" (click)="goToHome()">Home</div>
+        </li>
+        <li class="nav-item" *ngIf="adminPengajuan" >
+          <a class="nav-link" aria-current="page" (click)="goToFormPengajuan()" >Pengajuan</a>
+        </li>
+        <li class="nav-item" *ngIf="adminBedahara" >
+          <a class="nav-link" aria-current="page" (click)="goToReportPengajuan()" >Report Pengajuan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  aria-current="page" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+      <!-- Left links -->
+
+
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!-- Large modal -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>-->
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5">
+  <h3 class="mb-3">Daftar Pengajuan</h3>
+
+  <form [formGroup]="filterPengajuan" (ngSubmit)="getPengajuan()"  #f="ngForm">
+    <div class="row">
+      <div class="col-lg-2 mb-2">
+        <input type="text" class="form-control" formControlName="noPengajuan" placeholder="no pengajuan">
+      </div>
+      <div class="col-lg-2 mb-2">
+        <input type="text" class="form-control" formControlName="kegiatan" placeholder="kegiatan">
+      </div>
+      <div class="col-lg-2 mb-2">
+        <input type="text" class="form-control" formControlName="divisi" placeholder="divisi">
+      </div>
+      <div class="col-lg-2 mb-2">
+        <button class="btn btn-primary" type="submit">Filter</button>
+      </div>
+    </div>
+    <hr>
+  </form>
+
+  <div class="row my-3">
+    <div class="col-lg-10">
+      <h5 class="">Total Pengeluaran : Rp. {{getTotalPengeluaran() | number : '1.0-2'}}</h5>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn btn-sm btn-primary">Download Report</button>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">No. Pengajuan</th>
+      <th scope="col">Kegiatan</th>
+      <th scope="col">Keterangan</th>
+      <th scope="col">Nominal</th>
+      <th scope="col">Status</th>
+      <th scope="col">Tanggal</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngFor="let pengajuan of listPengajuan let i = index" [attr.data-index]="i" >
+      <td>{{i+1}}</td>
+      <td><a class="text-primary" (click)="goToDetailPengajuan(pengajuan.id)">{{pengajuan.noPengajuan}}</a></td>
+      <td>{{pengajuan.kegiatan}}</td>
+      <td>{{pengajuan.keterangan}}</td>
+      <td> Rp. {{pengajuan.jumlah | number : '1.0-2'}} </td>
+      <td>
+        <span class="badge badge-secondary" *ngIf="pengajuan.status=='SUB'">Pengajuan dikirim</span>
+        <span class="badge badge-primary" *ngIf="pengajuan.status=='APPROVED_BENDAHARA'">disetujui bendahara</span>
+        <span class="badge badge-success" *ngIf="pengajuan.status=='APPROVED'">Pengajuan selesai</span>
+        <span class="badge badge-danger" *ngIf="pengajuan.status=='REJECT'">Pengajuan ditolak</span>
+      <td> {{pengajuan.tanggalDibuat | date: 'YYYY-MM-dd HH:mm:ss'}}</td>
+
+    </tr>
+
+    </tbody>
+
+
+  </table>
+</div>
+
+
