@@ -68,19 +68,28 @@
         <div class="col-lg-4"></div>
 
         <div class="col-lg-5">
-          <div class="mb-3">
+          <div class="mb-3" *ngIf="!adminKepalaDivisi">
         <textarea matInput id="catatan" class="form-control" formControlName="catatan" placeholder="Keterangan" required="false"></textarea>
           </div>
           <div class="row col-lg-12">
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="!adminKepalaDivisi">
               <button type="button" class="btn-block btn-sm btn-secondary mr-3 mt-5" (click)="backToHome()">Kembali</button>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4" *ngIf="!adminKepalaDivisi">
               <button type="submit" class="btn-block  btn-sm btn-danger mr-3 mt-5" (click)="setStatus('REJECT')">Tolak</button>
             </div>
-            <div class="col-lg-4">
-              <button type="submit" class="btn-block  btn-sm btn-success mr-3 mt-5" (click)="setStatus('APPROVED')">Terima</button>
+            <div class="col-lg-12 row" *ngIf="adminKepalaDivisi">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4" class="align-item-center" >
+              <button type="submit" class="btn-block  btn-sm btn-success mr-3 mt-5"  (click)="setStatus('APPROVED')">Terima</button>
             </div>
+            <div class="col-lg-4"></div>
+            </div>
+
+            <div class="col-lg-4" class="align-item-center" *ngIf="!adminKepalaDivisi" >
+              <button type="submit" class="btn-block  btn-sm btn-success mr-3 mt-5"  (click)="setStatus('APPROVED')">Terima</button>
+            </div>
+
           </div>
         </div>
         <div class="col-lg-3"></div>

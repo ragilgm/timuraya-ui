@@ -15,6 +15,7 @@ export class ApprovalPengajuanComponent implements OnInit {
   paramId! :string | null
   detailPengajuan!:PengajuanDto;
   historyPengajuan!: FormGroup;
+  adminKepalaDivisi?:boolean;
   status!:string
 
   constructor(
@@ -26,6 +27,7 @@ export class ApprovalPengajuanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.canActive()
     this.historyPengajuan = this.fb.group({
       "catatan": ['', Validators.required],
       "status": ['', Validators.required],
@@ -35,7 +37,16 @@ export class ApprovalPengajuanComponent implements OnInit {
       this.paramId = params.get('id')
     })
     this.loadPengajuan(this.paramId)
+    console.log(this.adminKepalaDivisi)
+  }
 
+  canActive(){
+    let jabatan = localStorage.getItem("jabatan")
+    if(jabatan===JSON.stringify("ADMIN_KEPALA_DIVISI")){
+      this.adminKepalaDivisi=true;
+    }else {
+      this.adminKepalaDivisi=false;
+    }
   }
 
   loadPengajuan(id: string | null | undefined){
@@ -56,6 +67,15 @@ export class ApprovalPengajuanComponent implements OnInit {
   }
 
   submit(){
+
+    if(this.adminKepalaDivisi){
+      if (confirm('Dengan mentekan tombol approve anda telah mensetujui proses pengajuan ini dengan bukti digital signature pada invoce')) {
+        // Save it!
+      } else {
+        return;
+      }
+    }
+
     const {
       catatan,
     } = this.historyPengajuan.value;
