@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
       this.adminPengajuan=true;
     }
 
-    if(jabatan===JSON.stringify("ADMIN_KEPALA_DIVISI")){
+    if(jabatan===JSON.stringify("ADMIN_KEPALA_KEUANGAN")){
       this.adminKepalaDivisi=true;
     }
   }
