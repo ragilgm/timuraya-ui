@@ -69,7 +69,7 @@ export class ReportDetailPengajuanComponent implements OnInit {
       this.adminPengajuan=true;
     }
 
-    if(jabatan===JSON.stringify("ADMIN_KEPALA_KEUANGAN")){
+    if(jabatan===JSON.stringify("KEPALA_KEUANGAN")){
       this.adminKepalaDivisi=true;
     }
   }

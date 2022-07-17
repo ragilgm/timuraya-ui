@@ -42,7 +42,7 @@ export class ApprovalPengajuanComponent implements OnInit {
 
   canActive(){
     let jabatan = localStorage.getItem("jabatan")
-    if(jabatan===JSON.stringify("ADMIN_KEPALA_KEUANGAN")){
+    if(jabatan===JSON.stringify("KEPALA_KEUANGAN")){
       this.adminKepalaDivisi=true;
     }else {
       this.adminKepalaDivisi=false;
