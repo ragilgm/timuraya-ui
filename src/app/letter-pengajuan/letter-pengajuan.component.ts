@@ -29,7 +29,7 @@ export class LetterPengajuanComponent implements OnInit {
     this.activeRouter.paramMap.subscribe((params: ParamMap) => {
       this.paramId = params.get('id')
     })
-    this.letterUrl= this.baseUrl+"pengajuan/letter/"+this.paramId;
+    this.letterUrl= "";
   }
 
 }
