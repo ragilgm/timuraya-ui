@@ -25,7 +25,7 @@
                   <div class="col-lg-4 mt-2" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan">Link Invoice :</div>
                   <div class="col-lg-8 mt-2">
                     <a class="text-primary ml-2" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan" (click)="getLetterFile(detailPengajuan.id)">View</a>
-                    <a class="text-primary ml-2" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan" [href]="'http://localhost:8080/pengajuan/letter/'+detailPengajuan.id+'/download'">Download</a>
+                    <a class="text-primary ml-2" *ngIf="detailPengajuan.status==='APPROVED'&&isPengajuan" [href]="'http://ec2-54-193-120-114.us-west-1.compute.amazonaws.com/api/pengajuan/letter/'+detailPengajuan.id+'/download'">Download</a>
                   </div>
         </div>
 

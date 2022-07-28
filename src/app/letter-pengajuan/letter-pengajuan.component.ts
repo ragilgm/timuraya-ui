@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {PengajuanService} from "../core/pengajuan/pengajuan.service";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-letter-pengajuan',
@@ -11,24 +12,24 @@ import {PengajuanService} from "../core/pengajuan/pengajuan.service";
 export class LetterPengajuanComponent implements OnInit {
 
   paramId! :string | null
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private activeRouter :ActivatedRoute,
     private pengajuanService: PengajuanService
   ) { }
-
+  baseUrl! : string
   letterUrl! : string;
 
   ngOnInit(): void {
+    this.baseUrl=environment.baseUrl
     if(localStorage.getItem("id") == null){
       this.router.navigate(['/login']);
     }
     this.activeRouter.paramMap.subscribe((params: ParamMap) => {
       this.paramId = params.get('id')
     })
-    this.letterUrl= "http://localhost:8080/pengajuan/letter/"+this.paramId;
+    this.letterUrl= this.baseUrl+"pengajuan/letter/"+this.paramId;
   }
 
 }
